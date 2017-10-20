@@ -1,0 +1,134 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+						http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+					    http://www.liquibase.org/xml/ns/dbchangelog-ext 
+					    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<preConditions>
+		<dbms type="mysql" />
+		<runningAs username="karma" />
+	</preConditions>
+
+	<!-- <changeSet id="" author="karma"> <preConditions onFail="MARK_RAN"> 
+		<not> <tableExists tableName="" /> </not> </preConditions> <createTable tableName=""> 
+		<column name="id" type="BIGINT"> <constraints nullable="false" primaryKey="true" 
+		/> </column> <column name="" type=""/> </createTable> </changeSet> -->
+
+	<changeSet author="karma" id="1">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="user" />
+			</not>
+		</preConditions>
+		<createTable tableName="user">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_user" />
+			</column>
+			<column name="username" type="VARCHAR(255)" />
+			<column name="password" type="VARCHAR(255)" />
+			<column name="ci" type="BIGINT" />
+			<column name="rif" type="BIGINT" />
+			<column name="firstName" type="VARCHAR(255)" />
+			<column name="lastName" type="VARCHAR(255)" />
+			<column name="sex" type="VARCHAR(1)" />
+			<column name="birthdate" type="DATETIME" />
+			<column name="email" type="VARCHAR(255)" />
+			<column name="address" type="VARCHAR(255)" />
+			<column name="phoneNumber" type="VARCHAR(255)" />
+			<column name="idpost" type="BIGINT" />
+			<column name="idcompany" type="BIGINT" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="2" author="karma">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="company" />
+			</not>
+		</preConditions>
+		<createTable tableName="company">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_company" />
+			</column>
+			<column name="companyname" type="VARCHAR(255)" />
+			<column name="rif" type="VARCHAR(255)" />
+			<column name="description" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="3" author="karma">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="post" />
+			</not>
+		</preConditions>
+		<createTable tableName="post">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_post" />
+			</column>
+			<column name="name" type="VARCHAR(255)" />
+			<column name="description" type="VARCHAR(255)" />
+			<!-- column name="idcostcenter" type="BIGINT" /> centro de costos al que 
+				pertenece el cargo -->
+<!-- 			<column name="iddepartment" type="BIGINT" /> dpto al que pertenece el cargo -->
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="idpost"
+			baseTableName="user" constraintName="fk_user__post" onDelete="CASCADE"
+			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="post" />
+	</changeSet>
+
+<!-- 	<changeSet id="15" author="karma"> -->
+<!-- 		<preConditions onFail="MARK_RAN"> -->
+<!-- 			<not> -->
+<!-- 				<tableExists tableName="file" /> -->
+<!-- 			</not> -->
+<!-- 		</preConditions> -->
+<!-- 		<createTable tableName="file"> -->
+<!-- 			<column name="id" type="BIGINT" autoIncrement="true"> -->
+<!-- 				<constraints nullable="false" primaryKey="true" -->
+<!-- 					primaryKeyName="pk_file" /> -->
+<!-- 			</column> -->
+<!-- 			<column name="idconsult" type="BIGINT"></column> -->
+<!-- 			<column name="filename" type="VARCHAR(255)" /> -->
+<!-- 			<column name="type" type="VARCHAR(60)" /> -->
+<!-- 			<column name="filedata" type="LONGBLOB" /> -->
+<!-- 		</createTable> -->
+
+<!-- 		<addForeignKeyConstraint constraintName="fk_user__file" -->
+<!-- 			referencedTableName="file" baseColumnNames="photo" baseTableName="user" -->
+<!-- 			referencedColumnNames="id" /> -->
+<!-- 	</changeSet> -->
+
+	<changeSet id="4" author="karma">
+		<preConditions>
+			<not>
+				<tableExists tableName="havepost" />
+			</not>
+		</preConditions>
+
+		<createTable tableName="havepost">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_contract" />
+			</column>
+			<column name="idpost" type="BIGINT">
+				<constraints nullable="false" foreignKeyName="fk_havepost__post"
+					referencedTableName="post" referencedColumnNames="id" />
+			</column>
+			<column name="idcompany" type="BIGINT">
+				<constraints nullable="false" foreignKeyName="fk_havepost__coompany"
+					referencedTableName="company" referencedColumnNames="id" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<!--changeSet id="28" author="karma"> <insert tableName="user"> <column 
+		name="username" type="VARCHAR(255)" value="atarazona"/> <column name="password" 
+		type="VARCHAR(255)" value="4242"/> </insert> </changeSet -->
+</databaseChangeLog>
