@@ -38,6 +38,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
 	public Map<String, Object> login(LoginRequest loginRequest) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		User user = userRepository.findByUsernameAndPassword(
 				loginRequest.getUsername(), loginRequest.getPassword());

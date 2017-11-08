@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +27,7 @@ public class Company extends BaseEntity {
 	private String rif;
 	private String description;
 	private List<User> employees;
+	private List<Post> posts;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,12 +49,30 @@ public class Company extends BaseEntity {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="employer")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employer")
 	@JsonManagedReference
 	public List<User> getEmployees() {
 		return employees;
+	}
+
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "havepost", 
+	inverseJoinColumns = {
+			@JoinColumn(name = "idpost", 
+					nullable = false, 
+					updatable = false, 
+					referencedColumnName = "id") 
+			}, 
+	joinColumns = {
+					@JoinColumn(name = "idcompany", 
+							nullable = false, 
+							updatable = false, 
+							referencedColumnName = "id") })
+	public List<Post> getPosts() {
+		return posts;
 	}
 
 	public void setId(Long id) {
@@ -73,5 +95,8 @@ public class Company extends BaseEntity {
 		this.employees = employees;
 	}
 
-	
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 }

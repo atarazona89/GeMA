@@ -13,6 +13,7 @@ public interface CompanyService {
 	public List<Company> findAll();
 	public Company saveCompany(CompanyRequest companyRequest);
 	public Company createCompany(Company companyRequest);
+	public List<Company> createCompany();
 	public Company updateCompany(Long id, CompanyRequest companyRequest);
 	public ResponseEntity<Object> deleteCompany(Long id);
 	

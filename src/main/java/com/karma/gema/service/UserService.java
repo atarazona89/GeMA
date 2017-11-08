@@ -12,7 +12,7 @@ public interface UserService {
 	public User findById(Long id);
 	public List<User> findAll();
 	public User saveUser(UserRequest userRequest);
-	public User createUser(User user);
+	public List<User> createUsers();
 	public User updateUser(Long id, UserRequest userRequest);
 	public ResponseEntity<Object> deleteUser(Long id);
 }

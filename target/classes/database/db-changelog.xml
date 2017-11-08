@@ -71,15 +71,18 @@
 				<constraints nullable="false" primaryKey="true"
 					primaryKeyName="pk_post" />
 			</column>
+			<column name="idcompany" type="BIGINT" />
 			<column name="name" type="VARCHAR(255)" />
 			<column name="description" type="VARCHAR(255)" />
-			<!-- column name="idcostcenter" type="BIGINT" /> centro de costos al que 
-				pertenece el cargo -->
-<!-- 			<column name="iddepartment" type="BIGINT" /> dpto al que pertenece el cargo -->
+ 			<column name="idcostcenter" type="BIGINT" /> <!-- centro de costos al que pertenece el cargo --> 
+			<column name="iddepartment" type="BIGINT" /> <!-- dpto al que pertenece el cargo -->
 		</createTable>
 		<addForeignKeyConstraint baseColumnNames="idpost"
 			baseTableName="user" constraintName="fk_user__post" onDelete="CASCADE"
 			onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="post" />
+       <addForeignKeyConstraint baseColumnNames="idcompany"
+            baseTableName="post" constraintName="fk_post_company" onDelete="CASCADE"
+            onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="company" />
 	</changeSet>
 
 <!-- 	<changeSet id="15" author="karma"> -->

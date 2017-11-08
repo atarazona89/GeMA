@@ -28,22 +28,18 @@ public class UserController {
 		//return userService.createUser(new User());
 		return userService.findById(id);
 	}
-	
-	@RequestMapping(value = "/master", method = RequestMethod.GET)
-	public @ResponseBody
-	User getUser() {
-		return userService.createUser(new User());
-	}	
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody
 	List<User> getUsers() {
+		System.out.println("------------- getUsers()-----------------------------------------");
 		return userService.findAll();
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public @ResponseBody
 	User createUser(@RequestBody UserRequest userRequest) {
+		System.out.println("---------------------- Create users -----------------------------");
 		return userService.saveUser(userRequest);
 	}
 

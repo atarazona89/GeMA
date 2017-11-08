@@ -1,5 +1,6 @@
 package com.karma.gema.service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.karma.gema.model.Company;
+import com.karma.gema.model.Post;
 import com.karma.gema.model.User;
+import com.karma.gema.repositories.CompanyRepository;
+import com.karma.gema.repositories.PostRepository;
 import com.karma.gema.repositories.UserRepository;
 import com.karma.gema.request.UserRequest;
 
@@ -15,6 +20,8 @@ import com.karma.gema.request.UserRequest;
 public class UserServiceImpl implements UserService{
 
 	@Autowired UserRepository userRepository;
+	@Autowired PostRepository postRepository;
+	@Autowired CompanyRepository companyRepository;
 	
 	public User findById(Long id) {
 		return userRepository.findById(id).get();
@@ -24,7 +31,14 @@ public class UserServiceImpl implements UserService{
 		return userRepository.saveAndFlush(fromReq(new User(), userRequest));
 	}
 	
-	public User createUser(User user){
+	@Override
+	public List<User> createUsers(){
+		
+		List<User> ltUsers = new LinkedList<User>();
+		User user = new User();
+		Post post = postRepository.findById((long) 1).get();
+		//Company company = companyRepository.findById((long) 1).get();
+		
 		user.setFirstName("Alejandro");
 		user.setLastName("Tarazona");
 		user.setEmail("alejandrotarazona@gmail.com");
@@ -34,13 +48,36 @@ public class UserServiceImpl implements UserService{
 		user.setAddress("Caracas");
 		user.setCi(Long.valueOf("424242"));
 		user.setRif(Long.valueOf(21212121));
-		userRepository.save(user);
-		return user;
+		user.setPost(post);
+		
+		ltUsers.add(userRepository.save(user));
+		
+		user.setFirstName("Karma");
+		user.setLastName("Admin");
+		user.setEmail("karma@karma.com");
+		user.setPhoneNumber("123123123");
+		user.setUsername("Karma");
+		user.setPassword("123123");
+		user.setAddress("Chile");
+		user.setCi(Long.valueOf("123123123"));
+		user.setRif(Long.valueOf(123213123));
+		user.setPost(post);
+		
+		ltUsers.add(userRepository.save(user));
+		
+		return ltUsers;
 	}
 
 	@Override
 	public List<User> findAll() {
-		return userRepository.findAll();
+		List<User> ltUsers = userRepository.findAll();
+		
+		for (User user : ltUsers) {
+			//System.out.println(user.getUsername() + "\t" + user.getFirstName());
+			user.setPassword("");
+		}
+		
+		return ltUsers;
 	}
 
 	@Override

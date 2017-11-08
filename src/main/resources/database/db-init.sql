@@ -1,4 +1,4 @@
-drop database occupational;
-create database occupational;
-GRANT ALL PRIVILEGES ON occupational.* TO 'karma'@'localhost';
+drop database gema;
+create database gema;
+GRANT ALL PRIVILEGES ON gema.* TO 'karma'@'localhost';
 use gema;
