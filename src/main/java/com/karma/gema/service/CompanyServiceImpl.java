@@ -39,9 +39,8 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Company createCompany(Company companyRequest) {
-		// TODO Auto-generated method stub
-		return null;
+	public Company createCompany(CompanyRequest companyRequest) {
+		return companyRepository.save(fromReq(new Company(), companyRequest));
 	}
 
 	@Override
@@ -59,6 +58,11 @@ public class CompanyServiceImpl implements CompanyService {
 			return new ResponseEntity<Object>(ex.getLocalizedMessage(),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@Override
+	public Company findByIdUser(Long id) {
+		return companyRepository.findByUserId(id);
 	}
 	
 	@Override

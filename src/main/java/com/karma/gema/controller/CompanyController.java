@@ -30,7 +30,7 @@ public class CompanyController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody
-	List<Company> getCompaniess() {
+	List<Company> getCompanies() {
 		return companyService.findAll();
 	}
 
@@ -51,5 +51,10 @@ public class CompanyController {
 	public @ResponseBody
 	ResponseEntity<Object> deleteCompany(@PathVariable("id") Long id) {
 		return companyService.deleteCompany(id);
+	}
+	
+	@RequestMapping(value = "/byuser/{id}", method = RequestMethod.GET)
+	public @ResponseBody Company getByUser(@PathVariable("id") Long id) {
+		return companyService.findByIdUser(id);
 	}
 }

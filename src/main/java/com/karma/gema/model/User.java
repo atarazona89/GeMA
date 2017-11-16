@@ -27,7 +27,6 @@ public class User extends BaseEntity {
 	private String username;
 	private String password;
 	private Long ci;
-	private Long rif;
 	private String firstName;
 	private String lastName;
 	private String sex;
@@ -36,7 +35,6 @@ public class User extends BaseEntity {
 	private String phoneNumber;
 	private String email;
 	private Company employer;
-	private Post post;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,11 +55,6 @@ public class User extends BaseEntity {
 	@Column(name = "ci")
 	public Long getCi() {
 		return ci;
-	}
-
-	@Column(name = "rif")
-	public Long getRif() {
-		return rif;
 	}
 
 	@Column(name = "firstName")
@@ -105,14 +98,6 @@ public class User extends BaseEntity {
 		return employer;
 	}
 
-	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name = "idpost", referencedColumnName = "id")
-	@JsonBackReference
-	public Post getPost() {
-		return post;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -127,10 +112,6 @@ public class User extends BaseEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public void setRif(Long rif) {
-		this.rif = rif;
 	}
 
 	public void setFirstName(String firstName) {
@@ -163,10 +144,6 @@ public class User extends BaseEntity {
 
 	public void setEmployer(Company employer) {
 		this.employer = employer;
-	}
-
-	public void setPost(Post post) {
-		this.post = post;
 	}
 
 	public String toString() {

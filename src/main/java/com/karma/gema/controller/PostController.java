@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.karma.gema.model.Company;
 import com.karma.gema.model.Post;
 import com.karma.gema.request.PostRequest;
 import com.karma.gema.service.PostService;
@@ -29,11 +30,6 @@ public class PostController {
 	@RequestMapping(value="",method= RequestMethod.GET)
 	public @ResponseBody List<Post> getPosts(){
 		return postService.findAll();
-	}
-	
-	@RequestMapping(value="/byuser/{iduser}", method = RequestMethod.GET)
-	public @ResponseBody Post getPostByUserId(@PathVariable("iduser") Long idUser){
-		return postService.findByUser(idUser);
 	}
 	
 	@RequestMapping(value="", method = RequestMethod.POST)

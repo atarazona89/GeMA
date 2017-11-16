@@ -25,14 +25,6 @@ public class PostServiceImpl implements PostService {
 		return postRepository.findAll();
 	}
 	
-	
-
-	@Override
-	public Post findByUser(Long idUser) {
-//		return postRepository.findByIdUser(idUser);
-		return null;
-	}
-
 	@Override
 	public Post savePost(PostRequest postRequest) {
 		return postRepository.save(fromReq(new Post(), postRequest));

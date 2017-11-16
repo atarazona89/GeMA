@@ -36,7 +36,6 @@ public class UserServiceImpl implements UserService{
 		
 		List<User> ltUsers = new LinkedList<User>();
 		User user = new User();
-		Post post = postRepository.findById((long) 1).get();
 		//Company company = companyRepository.findById((long) 1).get();
 		
 		user.setFirstName("Alejandro");
@@ -47,8 +46,6 @@ public class UserServiceImpl implements UserService{
 		user.setPassword("4242");
 		user.setAddress("Caracas");
 		user.setCi(Long.valueOf("424242"));
-		user.setRif(Long.valueOf(21212121));
-		user.setPost(post);
 		
 		ltUsers.add(userRepository.save(user));
 		
@@ -60,8 +57,6 @@ public class UserServiceImpl implements UserService{
 		user.setPassword("123123");
 		user.setAddress("Chile");
 		user.setCi(Long.valueOf("123123123"));
-		user.setRif(Long.valueOf(123213123));
-		user.setPost(post);
 		
 		ltUsers.add(userRepository.save(user));
 		
@@ -73,7 +68,6 @@ public class UserServiceImpl implements UserService{
 		List<User> ltUsers = userRepository.findAll();
 		
 		for (User user : ltUsers) {
-			//System.out.println(user.getUsername() + "\t" + user.getFirstName());
 			user.setPassword("");
 		}
 		
@@ -101,8 +95,7 @@ public class UserServiceImpl implements UserService{
 	private User fromReq(User user, UserRequest userRequest){
 		user.setUsername(userRequest.getUsername());
 		user.setPassword(userRequest.getPassword());
-		user.setCi(userRequest.getCi());		
-		user.setRif(userRequest.getRif());
+		user.setCi(userRequest.getCi());
 		user.setAddress(userRequest.getAddress());
 		user.setEmail(userRequest.getEmail());
 		user.setFirstName(userRequest.getFirstName());
