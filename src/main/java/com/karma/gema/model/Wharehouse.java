@@ -3,6 +3,8 @@
  */
 package com.karma.gema.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -24,15 +27,16 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  *
  */
 @Entity
-@Table(name="wharehouse")
+@Table(name = "wharehouse")
 public class Wharehouse extends BaseEntity {
 
 	private Long id;
 	private String name;
 	private String code;
-	private String address;
 	private Sector sector;
 	private Permit permit;
+
+	private List<Stores> stores;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,11 +54,6 @@ public class Wharehouse extends BaseEntity {
 		return code;
 	}
 
-	@Column(name = "address")
-	public String getAddress() {
-		return address;
-	}
-
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "idarea", referencedColumnName = "id")
 	@JsonManagedReference
@@ -69,6 +68,13 @@ public class Wharehouse extends BaseEntity {
 		return permit;
 	}
 
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.MERGE, mappedBy = "wharehouse")
+	@JsonManagedReference
+	public List<Stores> getStores() {
+		return stores;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -81,16 +87,16 @@ public class Wharehouse extends BaseEntity {
 		this.code = code;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public void setSector(Sector sector) {
 		this.sector = sector;
 	}
 
 	public void setPermit(Permit permit) {
 		this.permit = permit;
+	}
+
+	public void setStores(List<Stores> stores) {
+		this.stores = stores;
 	}
 
 }

@@ -3,7 +3,7 @@ package com.karma.gema.model;
 import java.sql.Timestamp;
 
 public class BaseEntity {
-	
+
 	private Byte delete;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;

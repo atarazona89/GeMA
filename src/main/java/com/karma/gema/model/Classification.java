@@ -8,40 +8,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "post")
-public class Post {
-
+@Table(name="classification")
+public class Classification extends BaseEntity {
+	
 	private Long id;
 	private String name;
-	private String description;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
-
-	@Column(name = "name")
+	
+	@Column(name="name")
 	public String getName() {
 		return name;
 	}
-
-	@Column(name = "description")
-	public String getDescription() {
-		return description;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+	
+	
 
 }

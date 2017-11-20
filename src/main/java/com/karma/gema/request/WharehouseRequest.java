@@ -6,8 +6,6 @@ import com.karma.gema.model.Sector;
 public class WharehouseRequest {
 	private Long id;
 	private String name;
-	private String code;
-	private String address;
 	private Sector sector;
 	private Permit permit;
 
@@ -17,14 +15,6 @@ public class WharehouseRequest {
 
 	public String getName() {
 		return name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public String getAddress() {
-		return address;
 	}
 
 	public Sector getSector() {
@@ -43,14 +33,6 @@ public class WharehouseRequest {
 		this.name = name;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public void setSector(Sector sector) {
 		this.sector = sector;
 	}
@@ -58,5 +40,5 @@ public class WharehouseRequest {
 	public void setPermit(Permit permit) {
 		this.permit = permit;
 	}
-	
+
 }

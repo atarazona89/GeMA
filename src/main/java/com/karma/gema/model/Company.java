@@ -10,11 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -26,8 +26,8 @@ public class Company extends BaseEntity {
 	private String companyName;
 	private String rif;
 	private String description;
+	private CompanyType companyType;
 	private List<User> employees;
-	private List<Post> posts;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,23 +56,12 @@ public class Company extends BaseEntity {
 	public List<User> getEmployees() {
 		return employees;
 	}
-
-	@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "havepost", 
-	inverseJoinColumns = {
-			@JoinColumn(name = "idpost", 
-					nullable = false, 
-					updatable = false, 
-					referencedColumnName = "id") 
-			}, 
-	joinColumns = {
-					@JoinColumn(name = "idcompany", 
-							nullable = false, 
-							updatable = false, 
-							referencedColumnName = "id") })
-	public List<Post> getPosts() {
-		return posts;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "typeid", referencedColumnName = "id")
+	@JsonManagedReference
+	public CompanyType getCompanyType() {
+		return companyType;
 	}
 
 	public void setId(Long id) {
@@ -95,8 +84,8 @@ public class Company extends BaseEntity {
 		this.employees = employees;
 	}
 
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
+	public void setCompanyType(CompanyType companyType) {
+		this.companyType = companyType;
 	}
 
 }

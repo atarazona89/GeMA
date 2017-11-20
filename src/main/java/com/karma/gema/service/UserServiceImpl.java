@@ -8,11 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.karma.gema.model.Company;
-import com.karma.gema.model.Post;
 import com.karma.gema.model.User;
 import com.karma.gema.repositories.CompanyRepository;
-import com.karma.gema.repositories.PostRepository;
 import com.karma.gema.repositories.UserRepository;
 import com.karma.gema.request.UserRequest;
 
@@ -20,7 +17,6 @@ import com.karma.gema.request.UserRequest;
 public class UserServiceImpl implements UserService{
 
 	@Autowired UserRepository userRepository;
-	@Autowired PostRepository postRepository;
 	@Autowired CompanyRepository companyRepository;
 	
 	public User findById(Long id) {

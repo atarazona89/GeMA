@@ -56,8 +56,6 @@ public class WharehouseServiceImpl implements WharehouseService {
 	}
 	
 	private Wharehouse fromReq(Wharehouse wharehouse, WharehouseRequest wharehouseRequest) {
-		wharehouse.setAddress(wharehouseRequest.getAddress());
-		wharehouse.setCode(wharehouseRequest.getCode());
 		wharehouse.setName(wharehouseRequest.getName());
 		wharehouse.setPermit(wharehouseRequest.getPermit());		
 		wharehouse.setSector(wharehouseRequest.getSector());

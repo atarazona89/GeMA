@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.karma.gema.model.Company;
-import com.karma.gema.model.Post;
 import com.karma.gema.repositories.CompanyRepository;
-import com.karma.gema.repositories.PostRepository;
 import com.karma.gema.request.CompanyRequest;
 
 @Service
@@ -19,8 +17,6 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Autowired
 	CompanyRepository companyRepository;
-	@Autowired
-	PostRepository postRepository;
 
 	@Override
 	public Company findById(Long id) {
@@ -52,6 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
 	public ResponseEntity<Object> deleteCompany(Long id) {
 		try {
 			companyRepository.deleteById(id);
+			companyRepository.flush();
 			return new ResponseEntity<Object>(null, HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -68,27 +65,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public List<Company> createCompany(){
 		List<Company> ltCompanies = new LinkedList<Company>();
-		List<Post> posts = new LinkedList<Post>();
 		
-		Company company = new Company();
-		
-		company.setCompanyName("karma");
-		company.setRif("123123123");
-		company.setDescription("Empresa de gestion ambiental");
-		
-		PostService postService = new PostServiceImpl();
-		Post post = new Post();
-		
-		post.setName("admin");
-		post.setDescription("Administrador del sistema");
-		
-		post = postRepository.save(post);
-		posts.add(post);	
-		
-		company.setPosts(posts);
-		company = companyRepository.save(company);
-		
-		ltCompanies.add(company);		
 		
 		return ltCompanies;
 	}
@@ -97,6 +74,9 @@ public class CompanyServiceImpl implements CompanyService {
 		company.setCompanyName(companyRequest.getCompanyName());
 		company.setDescription(companyRequest.getDescription());
 		company.setRif(companyRequest.getRif());
+		
+		company.setCompanyType(companyRequest.getCompanyType());
+		
 		return company;
 	}
 }
