@@ -34,14 +34,15 @@ public class StoresController {
 	}
 	
 	@RequestMapping(value = "/bywharehouse/{id}", method = RequestMethod.GET)
-	List<Stores> getStoress(@PathVariable("id") Long id) {
+	public @ResponseBody
+	List<Stores>  getStoress(@PathVariable("id") Long id) {
 		return storesService.findByWharehouseId(id);
 	}
-
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	
+	@RequestMapping(value="/inventory", method = RequestMethod.POST)
 	public @ResponseBody
-	Stores createStores(@RequestBody StoresRequest storesRequest) {
-		return storesService.saveStores(storesRequest);
+	boolean addToInventory(@RequestBody StoresRequest storesRequest) {
+		return storesService.addToInventory(storesRequest);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)

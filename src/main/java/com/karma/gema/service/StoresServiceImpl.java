@@ -31,10 +31,10 @@ public class StoresServiceImpl implements StoresService {
 	public List<Stores> findByWharehouseId(Long id) {
 		return storesRepository.findByWharehouseId(id);
 	}
-
+	
 	@Override
-	public Stores saveStores(StoresRequest entityRequest) {
-		return storesRepository.saveAndFlush(fromReq(new Stores(), entityRequest));
+	public boolean addToInventory(StoresRequest entityRequest) {
+		return storesRepository.sp_stores(entityRequest.getProduct().getId(), entityRequest.getWharehouse().getId(), entityRequest.getAmount());
 	}
 
 	@Override

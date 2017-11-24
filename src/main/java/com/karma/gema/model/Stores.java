@@ -21,7 +21,7 @@ public class Stores extends BaseEntity {
 	private Long id;
 	private Wharehouse wharehouse;
 	private Product product;
-	private Long amount;
+	private double amount;
 
 	
 	@Id
@@ -41,17 +41,15 @@ public class Stores extends BaseEntity {
 	public Wharehouse getWharehouse() {
 		return wharehouse;
 	}
-	
-    @JsonIgnore
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idproduct", referencedColumnName = "id")
-	@JsonBackReference
 	public Product getProduct() {
 		return product;
 	}
 
 	@Column(name="amount")
-	public Long getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
@@ -63,7 +61,7 @@ public class Stores extends BaseEntity {
 		this.product = product;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 

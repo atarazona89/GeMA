@@ -29,8 +29,6 @@ public class Product extends BaseEntity {
 	private Storage storage;
 	private Measurement measurement;
 	private Classification classification;
-	
-	private List<Stores> stores;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -82,13 +80,6 @@ public class Product extends BaseEntity {
 	public Classification getClassification() {
 		return classification;
 	}
-	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
-	@JsonManagedReference
-	public List<Stores> getStores() {
-		return stores;
-	}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -120,10 +111,6 @@ public class Product extends BaseEntity {
 
 	public void setClassification(Classification classification) {
 		this.classification = classification;
-	}
-
-	public void setStores(List<Stores> stores) {
-		this.stores = stores;
 	}
 
 	

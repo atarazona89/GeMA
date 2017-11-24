@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
 		product.setName(productRequest.getName());
 		product.setStorage(productRequest.getStorage());
 		product.setType(productRequest.getType());
-		product.setStores(productRequest.getStores());
+		product.setClassification(productRequest.getClassification());
 
 		return product;
 	}

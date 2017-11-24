@@ -6,7 +6,7 @@ import com.karma.gema.model.Wharehouse;
 public class StoresRequest {
 	private Wharehouse wharehouse;
 	private Product product;
-	private Long amount;
+	private double amount;
 
 	public Wharehouse getWharehouse() {
 		return wharehouse;
@@ -16,7 +16,7 @@ public class StoresRequest {
 		return product;
 	}
 
-	public Long getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
@@ -28,7 +28,7 @@ public class StoresRequest {
 		this.product = product;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 

@@ -18,8 +18,6 @@ public class ProductRequest {
 	private Storage storage;
 	private Measurement measurement;
 	private Classification classification;
-	
-	private List<Stores> stores;
 
 	public String getName() {
 		return name;
@@ -49,10 +47,6 @@ public class ProductRequest {
 		return classification;
 	}
 
-	public List<Stores> getStores() {
-		return stores;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -79,10 +73,6 @@ public class ProductRequest {
 
 	public void setClassification(Classification classification) {
 		this.classification = classification;
-	}
-
-	public void setStores(List<Stores> stores) {
-		this.stores = stores;
 	}
 	
 	
