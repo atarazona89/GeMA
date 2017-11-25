@@ -10,6 +10,7 @@ import com.karma.gema.request.SectorRequest;
 public interface SectorService {
 	
 	public Sector findById(Long id);
+	public Sector findByWharehouseId(Long id);
 	public List<Sector> findAll();
 	public Sector saveSector(SectorRequest entityRequest);
 	public Sector updateSector(Long id, SectorRequest entityRequest);

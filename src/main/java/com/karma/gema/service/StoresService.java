@@ -11,7 +11,7 @@ public interface StoresService {
 	public Stores findById(Long id);
 	public List<Stores> findAll();
 	public List<Stores> findByWharehouseId(Long id);
-	public boolean addToInventory(StoresRequest entityRequest);
+	public Boolean addToInventory(StoresRequest entityRequest);
 	public Stores updateStores(Long id, StoresRequest entityRequest);
 	public ResponseEntity<Object> deleteStores(Long id);
 

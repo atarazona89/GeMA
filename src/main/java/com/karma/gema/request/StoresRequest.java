@@ -4,6 +4,7 @@ import com.karma.gema.model.Product;
 import com.karma.gema.model.Wharehouse;
 
 public class StoresRequest {
+	
 	private Wharehouse wharehouse;
 	private Product product;
 	private double amount;

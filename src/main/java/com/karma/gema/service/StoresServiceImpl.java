@@ -33,7 +33,8 @@ public class StoresServiceImpl implements StoresService {
 	}
 	
 	@Override
-	public boolean addToInventory(StoresRequest entityRequest) {
+	public Boolean addToInventory(StoresRequest entityRequest) {
+		System.out.println("\t\taddToInventory\tService");
 		return storesRepository.sp_stores(entityRequest.getProduct().getId(), entityRequest.getWharehouse().getId(), entityRequest.getAmount());
 	}
 

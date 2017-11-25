@@ -22,6 +22,11 @@ public class SectorServiceImpl implements SectorService {
 	}
 
 	@Override
+	public Sector findByWharehouseId(Long id) {
+		return sectorRepository.findByWharehouseId(id);
+	}
+
+	@Override
 	public List<Sector> findAll() {
 		return sectorRepository.findAll();
 	}

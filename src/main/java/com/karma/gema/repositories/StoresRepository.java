@@ -17,5 +17,5 @@ public interface StoresRepository extends JpaRepository<Stores, Long> {
 	public List<Stores> findByWharehouseId(@Param("id") Long id);
 	
 	@Procedure
-	public boolean sp_stores(Long idProduct, Long idWharehouse, double quantity);
+	public Boolean sp_stores(Long idProduct, Long idWharehouse, double quantity);
 }

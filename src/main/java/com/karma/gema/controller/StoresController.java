@@ -16,45 +16,39 @@ import com.karma.gema.request.StoresRequest;
 import com.karma.gema.service.StoresService;
 
 @Controller
-@RequestMapping(value="/stores")
+@RequestMapping(value = "/stores")
 public class StoresController {
-@Autowired
+	@Autowired
 	StoresService storesService;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody
-	Stores getStores(@PathVariable("id") Long id) {
+	public @ResponseBody Stores getStores(@PathVariable("id") Long id) {
 		return storesService.findById(id);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public @ResponseBody
-	List<Stores> getStoress() {
+	public @ResponseBody List<Stores> getStoress() {
 		return storesService.findAll();
 	}
-	
+
 	@RequestMapping(value = "/bywharehouse/{id}", method = RequestMethod.GET)
-	public @ResponseBody
-	List<Stores>  getStoress(@PathVariable("id") Long id) {
+	public @ResponseBody List<Stores> getStoress(@PathVariable("id") Long id) {
 		return storesService.findByWharehouseId(id);
 	}
-	
-	@RequestMapping(value="/inventory", method = RequestMethod.POST)
-	public @ResponseBody
-	boolean addToInventory(@RequestBody StoresRequest storesRequest) {
+
+	@RequestMapping(value = "/inventory", method = RequestMethod.POST, consumes = {"application/json;charset=UTF-8"}, produces={"application/json;charset=UTF-8"})
+	public @ResponseBody Boolean addToInventory(@RequestBody StoresRequest storesRequest) {
+		System.out.println("\t\taddToInventory");
 		return storesService.addToInventory(storesRequest);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public @ResponseBody
-	Stores updateStores(@PathVariable("id") Long id,
-			@RequestBody StoresRequest storesRequest) {
+	public @ResponseBody Stores updateStores(@PathVariable("id") Long id, @RequestBody StoresRequest storesRequest) {
 		return storesService.updateStores(id, storesRequest);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public @ResponseBody
-	ResponseEntity<Object> deleteStores(@PathVariable("id") Long id) {
+	public @ResponseBody ResponseEntity<Object> deleteStores(@PathVariable("id") Long id) {
 		return storesService.deleteStores(id);
 	}
 }

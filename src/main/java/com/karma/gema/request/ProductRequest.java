@@ -1,13 +1,10 @@
 package com.karma.gema.request;
 
-import java.util.List;
-
 import com.karma.gema.model.Classification;
 import com.karma.gema.model.Material;
 import com.karma.gema.model.Measurement;
 import com.karma.gema.model.ProductType;
 import com.karma.gema.model.Storage;
-import com.karma.gema.model.Stores;
 
 public class ProductRequest {
 	

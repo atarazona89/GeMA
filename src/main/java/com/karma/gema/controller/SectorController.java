@@ -28,6 +28,13 @@ public class SectorController {
 		//return sectorService.createSector(new Sector());
 		return sectorService.findById(id);
 	}
+	
+	@RequestMapping(value = "/bywharehouse/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	Sector getSectorByWharehouse(@PathVariable("id") Long id) {
+		//return sectorService.createSector(new Sector());
+		return sectorService.findByWharehouseId(id);
+	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody

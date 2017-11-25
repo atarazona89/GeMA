@@ -43,7 +43,6 @@ public class WharehouseController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public @ResponseBody
 	Wharehouse createWharehouse(@RequestBody WharehouseRequest wharehouseRequest) {
-		System.out.println("------------------ createWharehouse -------------");
 		return wharehouseService.saveWharehouse(wharehouseRequest);
 	}
 

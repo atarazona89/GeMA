@@ -3,8 +3,6 @@
  */
 package com.karma.gema.model;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -36,8 +33,6 @@ public class Wharehouse extends BaseEntity {
 	private Sector sector;
 	private Permit permit;
 
-	private List<Stores> stores;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -54,25 +49,20 @@ public class Wharehouse extends BaseEntity {
 		return code;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "idarea", referencedColumnName = "id")
 	@JsonManagedReference
 	public Sector getSector() {
 		return sector;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "idpermit", referencedColumnName = "id")
 	@JsonBackReference
 	public Permit getPermit() {
 		return permit;
-	}
-
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.MERGE, mappedBy = "wharehouse")
-	@JsonManagedReference
-	public List<Stores> getStores() {
-		return stores;
 	}
 
 	public void setId(Long id) {
@@ -93,10 +83,6 @@ public class Wharehouse extends BaseEntity {
 
 	public void setPermit(Permit permit) {
 		this.permit = permit;
-	}
-
-	public void setStores(List<Stores> stores) {
-		this.stores = stores;
 	}
 
 }
