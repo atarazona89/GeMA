@@ -9,6 +9,7 @@ import com.karma.gema.request.MeasurementRequest;
 
 public interface MeasurementService {
 	public Measurement findById(Long id);
+	public Measurement findByProductId(Long id);
 	public List<Measurement> findAll();
 	public Measurement saveMeasurement(MeasurementRequest entityRequest);
 	public Measurement updateMeasurement(Long id, MeasurementRequest entityRequest);

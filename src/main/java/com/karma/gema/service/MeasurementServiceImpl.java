@@ -23,6 +23,13 @@ public class MeasurementServiceImpl implements MeasurementService {
 	}
 
 	@Override
+	public Measurement findByProductId(Long id) {
+		return measurementRepository.getByProductId(id);
+	}
+
+
+
+	@Override
 	public List<Measurement> findAll() {
 		return measurementRepository.findAll();
 	}

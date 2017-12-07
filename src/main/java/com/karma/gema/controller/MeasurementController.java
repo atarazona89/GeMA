@@ -27,6 +27,11 @@ public class MeasurementController {
 	Measurement getMeasurement(@PathVariable("id") Long id) {
 		return measurementService.findById(id);
 	}
+	
+	@RequestMapping(value = "/byproduct/{id}", method = RequestMethod.GET)
+	public @ResponseBody Measurement getByProductId(@PathVariable("id") Long id) {
+		return measurementService.findByProductId(id);
+	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody

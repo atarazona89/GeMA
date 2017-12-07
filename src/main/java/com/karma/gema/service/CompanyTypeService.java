@@ -9,6 +9,7 @@ import com.karma.gema.request.CompanyTypeRequest;
 
 public interface CompanyTypeService {
 	public CompanyType findById(Long id);
+	public CompanyType findByCompanyId(Long id);
 	public List<CompanyType> findAll();
 	public CompanyType saveCompanyType(CompanyTypeRequest entityRequest);
 	public CompanyType updateCompanyType(Long id, CompanyTypeRequest entityRequest);

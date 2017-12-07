@@ -5,12 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.karma.gema.model.CompanyType;
+import com.karma.gema.model.Wraping;
 
 @Repository
-public interface CompanyTypeRepository extends JpaRepository<CompanyType, Long> {
-	
-	@Query("select t from Company c join c.companyType t where c.id = (:idcompany)")
-	public CompanyType findByCompanyId(@Param("idcompany") Long id);
+public interface WrapingRepository extends JpaRepository<Wraping, Long> {
 
+	@Query("select w from IncomeStorage s join s.wraping w where s.id = (:idIncome)")
+	public Wraping getByIncomeId(@Param("idIncome") Long id);
 }

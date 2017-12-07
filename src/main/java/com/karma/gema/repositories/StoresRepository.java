@@ -18,4 +18,7 @@ public interface StoresRepository extends JpaRepository<Stores, Long> {
 	
 	@Procedure
 	public Boolean sp_stores(Long idProduct, Long idWharehouse, double quantity);
+	
+	@Procedure 
+	public void sp_stores_transfer(Long idWharehouseFrom, Long idProduct, Long idWharehouseTo, double quantity); 
 }

@@ -56,7 +56,8 @@ public class Company extends BaseEntity {
 		return employees;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "typeid", referencedColumnName = "id")
 	@JsonManagedReference
 	public CompanyType getCompanyType() {

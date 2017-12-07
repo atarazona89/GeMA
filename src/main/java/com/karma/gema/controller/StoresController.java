@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.karma.gema.model.Stores;
 import com.karma.gema.request.StoresRequest;
+import com.karma.gema.request.TransferRequest;
 import com.karma.gema.service.StoresService;
 
 @Controller
@@ -40,6 +41,12 @@ public class StoresController {
 	public @ResponseBody Boolean addToInventory(@RequestBody StoresRequest storesRequest) {
 		System.out.println("\t\taddToInventory");
 		return storesService.addToInventory(storesRequest);
+	}
+	
+	@RequestMapping(value = "/transfer", method = RequestMethod.POST, consumes = {"application/json;charset=UTF-8"}, produces={"application/json;charset=UTF-8"})
+	public @ResponseBody ResponseEntity<Object> transferInventory(@RequestBody TransferRequest transferRequest) {
+		System.out.println("\t\ttransferInventory");
+		return storesService.transferInventory(transferRequest);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)

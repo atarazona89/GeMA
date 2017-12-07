@@ -27,6 +27,12 @@ public class CompanyTypeController {
 	CompanyType getCompanyType(@PathVariable("id") Long id) {
 		return companyTypeService.findById(id);
 	}
+	
+	@RequestMapping(value = "/bycompany/{id}", method = RequestMethod.GET)
+	public @ResponseBody CompanyType getByCompanyId(@PathVariable("id") Long id) {
+		return companyTypeService.findByCompanyId(id);
+				
+	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody

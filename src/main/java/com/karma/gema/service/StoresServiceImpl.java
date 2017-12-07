@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.karma.gema.model.Stores;
 import com.karma.gema.repositories.StoresRepository;
 import com.karma.gema.request.StoresRequest;
+import com.karma.gema.request.TransferRequest;
 
 @Service
 public class StoresServiceImpl implements StoresService {
@@ -31,11 +32,28 @@ public class StoresServiceImpl implements StoresService {
 	public List<Stores> findByWharehouseId(Long id) {
 		return storesRepository.findByWharehouseId(id);
 	}
-	
+
 	@Override
 	public Boolean addToInventory(StoresRequest entityRequest) {
 		System.out.println("\t\taddToInventory\tService");
-		return storesRepository.sp_stores(entityRequest.getProduct().getId(), entityRequest.getWharehouse().getId(), entityRequest.getAmount());
+		return storesRepository.sp_stores(entityRequest.getProduct().getId(), entityRequest.getWharehouse().getId(),
+				entityRequest.getAmount());
+	}
+
+	@Override
+	public ResponseEntity<Object> transferInventory(TransferRequest transferRequest) {
+		System.out.println(transferRequest.getWharehouseFrom().getName() + "\t" + transferRequest.getProduct().getName()
+				+ "\t" + transferRequest.getQuantity() + "\t" + transferRequest.getWharehouseTo().getName());
+		try {
+			storesRepository.sp_stores_transfer(transferRequest.getWharehouseFrom().getId(),
+					transferRequest.getProduct().getId(), transferRequest.getWharehouseTo().getId(),
+					transferRequest.getQuantity());
+			storesRepository.flush();
+			return new ResponseEntity<Object>(null, HttpStatus.OK);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return new ResponseEntity<Object>(ex.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@Override
